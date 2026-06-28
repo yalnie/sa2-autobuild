@@ -28,6 +28,11 @@ jobs:
           cp -r ext_extract/SDL2-2.30.3/* ext/
           rm -rf sdl2.zip ext_extract
 
+      - name: Decode Baseroms from Secrets
+        run: |
+          echo "${{ secrets.BASEROM_SA1_BASE64 }}" | base64 -d > baserom_sa1.gba
+          echo "${{ secrets.BASEROM_SA2_BASE64 }}" | base64 -d > baserom.gba
+
       - name: Compile SDL2.dll
         run: make SDL2.dll -j$(nproc)
 
