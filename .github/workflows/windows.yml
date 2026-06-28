@@ -31,13 +31,17 @@ jobs:
       - name: Compile SDL2.dll
         run: make SDL2.dll -j$(nproc)
 
-      - name: Compile Windows Executable
+      - name: Compile Sonic Advance 2 Windows Port
         run: make sdl_win32 -j$(nproc)
+
+      - name: Compile Sonic Advance 1 Windows Port
+        run: make GAME_NAME=sa1 sdl_win32 -j$(nproc)
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: sa2-windows-x64
+          name: sonic-advance-windows-ports
           path: |
+            sa1.sdl_win32.exe
             sa2.sdl_win32.exe
             SDL2.dll
